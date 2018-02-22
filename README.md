@@ -3,7 +3,7 @@ A python script carry out calculate the relative coverage of X and Y chromosomes
 
 
 # Instructions:
-The python script takes a modified output from `samtools depth` as input, via stdin. The samtools depth file should be manually modified to include a header that begins with a `#` and is including the sample names (generic or specific) as column headers, like below"
+The python script takes a modified output from `samtools depth` as input, via stdin. The samtools depth file should be manually modified to include a header that begins with a `#` and is including the sample names (generic or specific) as column headers, like below:
 ```
 #Chr	Pos	Sample1	Sample2	Sample3	Sample4	Sample5
 1	752566	1	0	1	0	1
