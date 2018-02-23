@@ -1,6 +1,8 @@
 # Sex.DetERRmine
 A python script carry out calculate the relative coverage of X and Y chromosomes, and their associated error bars, out of capture data.
 
+<br></br>
+_Mathematical equations added to README using [this tool](https://www.codecogs.com/latex/eqneditor.php)._
 
 # Instructions
 The python script takes a modified output from `samtools depth` as input, via stdin. The samtools depth file should be manually modified to include a header that begins with a `#` and is including the sample names (generic or specific) as column headers, like below:
