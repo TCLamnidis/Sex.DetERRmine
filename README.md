@@ -30,9 +30,13 @@ We can then calculate:
 
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{p}_{i}=\frac{\textsl{N}_{i}}{\textsl{N}}" title="\textsl{p}_{i}=\frac{\textsl{N}_{i}}{\textsl{N}}" /></p>
 
-Where _p<sub>i</sub>_ is the proportion of all sequenced reads that map to SNPs in _i_, estimated from the input depths. And: 
+<p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{Err}\left&space;(&space;N_i&space;\right&space;)=\sqrt{N\times&space;p_i\times&space;(1-p_i)}" title="\LARGE \textsl{Err}\left ( N_i \right )=\sqrt{N\times p_i\times (1-p_i)}" /></p>
+
+Where _p<sub>i</sub>_ is the proportion of all sequenced reads that map to SNPs in _i_, estimated from the input depths. The error around _N<sub>i</sub>_ is the error of the binomial distribution. Then: 
 
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{d}_{i}=\frac{\textsl{N}_{i}}{\textsl{S}_{i}}" title="\textsl{d}_{i}=\frac{\textsl{N}_{i}}{\textsl{S}_{i}}" /></p>
+
+<p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{Err(d}_{i})=\frac{\textsl{Err(N}_{i})}{S_{i}}" title="\LARGE \textsl{Err(d}_{i})=\frac{\textsl{Err(N}_{i})}{S_{i}}" /></p>
 
 Where _d<sub>i</sub>_ is the average depth on SNPs within _i_, and _S<sub>i</sub>_ is the number of SNPs in _i_.
 
@@ -40,4 +44,6 @@ The relative coverage on the X and Y chromosomes can then be calculated as:
 
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{rate}=\frac{\textsl{d}_{i}}{\textsl{d}_{Aut}}" title="\textsl{rate}=\frac{\textsl{d}_{X/Y}}{\textsl{d}_{Aut}}" /></p>
 
+We can then use error propagation to calculate the errors around the relative X and Y coverages:
 
+<p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{Err(x/y&space;rate)}=\sqrt{\left&space;(&space;Err(d_{x/y})\times&space;\frac{1}{d_{aut}}\right&space;)^{2}&plus;&space;\left&space;(Err(d_{aut})\times&space;\frac{d_{x/y}}{{d_{aut}}^{2}}&space;\right&space;)^{2}}" title="\LARGE \textsl{Err(x/y rate)}=\sqrt{\left ( Err(d_{x/y})\times \frac{1}{d_{aut}}\right )^{2}+ \left (Err(d_{aut})\times \frac{d_{x/y}}{{d_{aut}}^{2}} \right )^{2}}" /></p>
