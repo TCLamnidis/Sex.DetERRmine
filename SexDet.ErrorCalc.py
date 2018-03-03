@@ -81,7 +81,7 @@ for line in args.Input:
         if Chrom == "X":
             NrX[Names[x]]+=depths[Names[x]]
 
-SortNames=OrderedDict(sorted(Names.items(), key=lambda t: t[1]))
+# SortNames=OrderedDict(sorted(Names.items(), key=lambda t: t[1]))
 print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate", "y-rate", "Err(x-rate)", "Err(y-rate)", sep="\t", file=sys.stdout)
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
