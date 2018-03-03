@@ -41,6 +41,10 @@ if args.SampleList != None:
     Samples = [line.strip() for line in args.SampleList]
     for idx,Sample in enumerate(Samples):
         Names.update({Sample:idx})
+    NrAut  = [0 for x in range(len(Names))]
+    NrX    = [0 for x in range(len(Names))]
+    NrY    = [0 for x in range(len(Names))]
+    Totals = [0 for x in range(len(Names))]
     
 Reads={}
 AutSnps=0
