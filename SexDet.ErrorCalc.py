@@ -44,7 +44,7 @@ if args.SampleList != None:
     NrAut  = [0 for x in range(len(Names))]
     NrX    = [0 for x in range(len(Names))]
     NrY    = [0 for x in range(len(Names))]
-    Totals = [0 for x in range(len(Names))]
+    # Totals = [0 for x in range(len(Names))]
     
 Reads={}
 AutSnps=0
@@ -53,32 +53,36 @@ XSnps=0
 for line in args.Input:
     fields=line.strip().split()
     Chrom=fields[0]
-    if args.SampleList==None:
-        if fields[0][0]=="#":
+    if fields[0][0]=="#":
+        if args.SampleList==None:
             Zip    = zip(fields[2:],range(len(fields[2:])))
             for Sample,Index in Zip:
                 Names.update({Sample:Index})
             NrAut  = [0 for x in range(len(Names))]
             NrX    = [0 for x in range(len(Names))]
             NrY    = [0 for x in range(len(Names))]
-            Totals = [0 for x in range(len(Names))]
+            # Totals = [0 for x in range(len(Names))]
             continue
-
+        else:
+            continue
     depths=[int(x) for x in fields[2:]]
+    if Chrom != "Y" and Chrom != "X":
+        AutSnps+=1
+    if Chrom == "Y":
+        YSnps+=1
+    if Chrom == "X":
+        XSnps+=1
     for x in Names:
         # Totals[Names[x]]+=depths[Names[x]]
         if Chrom != "Y" and Chrom != "X":
-            AutSnps+=1
             NrAut[Names[x]]+=depths[Names[x]]
         if Chrom == "Y":
-            YSnps+=1
             NrY[Names[x]]+=depths[Names[x]]
         if Chrom == "X":
-            XSnps+=1
             NrX[Names[x]]+=depths[Names[x]]
 
 SortNames=OrderedDict(sorted(Names.items(), key=lambda t: t[1]))
-print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "Nr on target", "NrAut", "NrX", "NrY", "x-rate", "y-rate", "Err(x-rate)", "Err(y-rate)", sep="\t", file=sys.stdout)
+print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate", "y-rate", "Err(x-rate)", "Err(y-rate)", sep="\t", file=sys.stdout)
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
     print (Ind, AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], rateErr["Y"], sep="\t", file=sys.stdout)
