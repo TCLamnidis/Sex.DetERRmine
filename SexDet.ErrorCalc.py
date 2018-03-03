@@ -28,7 +28,7 @@ def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
 
 #### MAIN ####
 
-parser = argparse.ArgumentParser(description="Extract the frequency of shared rare variants between each left population and all right populations from a freqsum file. Also preforms error estimation using jackknifing, using the number of observed sites for normalisation.")
+parser = argparse.ArgumentParser(description="Calculate the relative X- and Y-chromosome coverage of data, as well as the associated error bars for each.")
 parser.add_argument("-I", "--Input", metavar="<INPUT FILE>", type=argparse.FileType('r'), help="The input samtools depth file. Omit to read from stdin.", required=False)
 parser.add_argument("-f", "--SampleList", type=argparse.FileType('r'), help="A list of samples/bams that were in the depth file. One per line. Should be in the order of the samtools depth output.")
 args = parser.parse_args()
