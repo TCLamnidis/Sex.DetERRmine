@@ -1,5 +1,5 @@
 # Sex.DetERRmine
-A python script carry out calculate the relative coverage of X and Y chromosomes, and their associated error bars, out of capture data.
+A python script carry out calculate the relative coverage of X and Y chromosomes, and their associated error bars.
 
 <br></br>
 _Mathematical equations added to README using [this tool](https://www.codecogs.com/latex/eqneditor.php)._
@@ -14,12 +14,35 @@ The python script takes a modified output from `samtools depth` as input, via st
 1	842013	0	1	0	3	1
  ...
 ```
-You can then run the script as below:
+Alternatively, a Sample/bam list can be provided using the `-f` option. This list should include 1 name per line, and can be the same list used for the `samtools depth` command.
+
+For instructions on the options available you can try running the script with the `-h` flag:
 ```
-SexDet.ErrorCalc.py <Input.Depth.file.txt 
+$SexDet.ErrorCalc.py -h
+
+usage: SexDet.ErrorCalc.py [-h] [-I <INPUT FILE>] [-f SAMPLELIST]
+
+Calculate the relative X- and Y-chromosome coverage of data, as well as the
+associated error bars for each.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -I <INPUT FILE>, --Input <INPUT FILE>
+                        The input samtools depth file. Omit to read from
+                        stdin.
+  -f SAMPLELIST, --SampleList SAMPLELIST
+                        A list of samples/bams that were in the depth file.
+                        One per line. Should be in the order of the samtools
+                        depth output.
+
 ```
 
 The script will print out the number of SNPs and the number of reads found on each of Autosomes/X/Y, as well as the relative X/Y coverage and their associated errors.
+
+It is possible to pipe the `samtools depth` output directly to this script:
+```
+samtools depth -a -q30 -Q30 -b <BED File> -f <BAM file list> | SexDet.ErrCalc.py -f <BAM file list>
+```
 
 # Mathematical explanation
 We assume that sequenced reads are distributed along the genome randomly and independently from each other. The "genome" here is made up only of positions in the input depth file. 
