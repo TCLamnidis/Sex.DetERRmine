@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys
+import sys, argparse
 from math import sqrt
 from collections import OrderedDict
 
@@ -28,26 +28,38 @@ def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
 
 #### MAIN ####
 
+parser = argparse.ArgumentParser(description="Extract the frequency of shared rare variants between each left population and all right populations from a freqsum file. Also preforms error estimation using jackknifing, using the number of observed sites for normalisation.")
+parser.add_argument("-I", "--Input", metavar="<INPUT FILE>", type=argparse.FileType('r'), help="The input samtools depth file. Omit to read from stdin.", required=False)
+parser.add_argument("-f", "--SampleList", type=argparse.FileType('r'), help="A list of samples/bams that were in the depth file. One per line. Should be in the order of the samtools depth output.")
+args = parser.parse_args()
+
+if args.Input == None:
+    args.Input = sys.stdin
+
 Names=OrderedDict()
+if args.SampleList != None:
+    Samples = [line.strip() for line in args.SampleList]
+    for idx,Sample in enumerate(Samples):
+        Names.update({Sample:idx})
+    
 Reads={}
 AutSnps=0
 YSnps=0
 XSnps=0
-for line in sys.stdin:
+for line in args.Input:
     fields=line.strip().split()
     Chrom=fields[0]
-    if fields[0][0]=="#":
-        Zip=zip(fields[2:],range(len(fields[2:])))
-        for Sample,Index in Zip:
-            Names.update({Sample:Index})
-        NrAut=[0 for x in range(len(Names))]
-        NrX=[0 for x in range(len(Names))]
-        NrY=[0 for x in range(len(Names))]
-        Totals=[0 for x in range(len(Names))]
-        continue
-        # print (Names)
-        # print (Totals)
-        # print (pAut)
+    if args.SampleList==None:
+        if fields[0][0]=="#":
+            Zip    = zip(fields[2:],range(len(fields[2:])))
+            for Sample,Index in Zip:
+                Names.update({Sample:Index})
+            NrAut  = [0 for x in range(len(Names))]
+            NrX    = [0 for x in range(len(Names))]
+            NrY    = [0 for x in range(len(Names))]
+            Totals = [0 for x in range(len(Names))]
+            continue
+
     depths=[int(x) for x in fields[2:]]
     for x in Names:
         # Totals[Names[x]]+=depths[Names[x]]
