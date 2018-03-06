@@ -1,5 +1,5 @@
 # Sex.DetERRmine
-A python script carry out calculate the relative coverage of X and Y chromosomes, and their associated error bars.
+A python script carry out calculate the relative coverage of X and Y chromosomes, and their associated error bars, from the depth of coverage at specified SNPs.
 
 <br></br>
 _Mathematical equations added to README using [this tool](https://www.codecogs.com/latex/eqneditor.php)._
