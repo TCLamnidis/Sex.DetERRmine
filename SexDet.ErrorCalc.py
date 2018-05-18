@@ -52,7 +52,10 @@ YSnps=0
 XSnps=0
 for line in args.Input:
     fields=line.strip().split()
-    Chrom=fields[0]
+    if fields [0][0:3]=="chr":
+        Chrom=fields[0][3:]
+    else:
+        Chrom=fields[0]
     if fields[0][0]=="#":
         if args.SampleList==None:
             Zip    = zip(fields[2:],range(len(fields[2:])))
@@ -66,11 +69,11 @@ for line in args.Input:
         else:
             continue
     depths=[int(x) for x in fields[2:]]
-    if Chrom != "Y" and Chrom != "X" and Chrom != "chrY" and Chrom != "chrX":
+    if Chrom != "Y" and Chrom != "X":
         AutSnps+=1
-    if Chrom == "Y" or Chrom == "chrY":
+    if Chrom == "Y":
         YSnps+=1
-    if Chrom == "X" or Chrom == "chrX":
+    if Chrom == "X":
         XSnps+=1
     for x in Names:
         # Totals[Names[x]]+=depths[Names[x]]
