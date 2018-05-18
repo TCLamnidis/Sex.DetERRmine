@@ -66,11 +66,11 @@ for line in args.Input:
         else:
             continue
     depths=[int(x) for x in fields[2:]]
-    if Chrom != "Y" and Chrom != "X":
+    if Chrom != "Y" and Chrom != "X" and Chrom != "chrY" and Chrom != "chrX":
         AutSnps+=1
-    if Chrom == "Y":
+    if Chrom == "Y" or Chrom == "chrY":
         YSnps+=1
-    if Chrom == "X":
+    if Chrom == "X" or Chrom == "chrX":
         XSnps+=1
     for x in Names:
         # Totals[Names[x]]+=depths[Names[x]]
