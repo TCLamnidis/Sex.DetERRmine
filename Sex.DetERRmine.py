@@ -89,9 +89,8 @@ print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate
 data=OrderedDict()
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
-    data[Ind] = [AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], 
-    rateErr["Y"]]
+    data[Ind] = {"Snps Autosomal" : AutSnps, "XSnps" : XSnps, "YSnps": YSnps, "NR Aut" : NrAut[Names[Ind]],"NrX": NrX[Names[Ind]], "NrY": NrY[Names[Ind]], "RateX" : rate["X"], "RateY": rate["Y"], "RateErrX" : rateErr["X"], "RateErrY" : rateErr["Y"]}
     print (Ind, AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], rateErr["Y"], sep="\t", file=sys.stdout)
 
-with open('sexdetermine.json', w) as outfile:
+with open('sexdetermine.json', 'w') as outfile:
     json.dump(data, outfile)
