@@ -86,8 +86,12 @@ for line in args.Input:
 
 # SortNames=OrderedDict(sorted(Names.items(), key=lambda t: t[1]))
 print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate", "y-rate", "Err(x-rate)", "Err(y-rate)", sep="\t", file=sys.stdout)
+data=OrderedDict()
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
+    data[Ind] = [AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], 
+    rateErr["Y"]]
     print (Ind, AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], rateErr["Y"], sep="\t", file=sys.stdout)
+
 with open('sexdetermine.json', w) as outfile:
-    json.dump(Names, outfile)
+    json.dump(data, outfile)
