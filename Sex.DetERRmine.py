@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys, argparse
+import sys, argparse, json
 from math import sqrt
 from collections import OrderedDict
 
@@ -89,3 +89,5 @@ print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
     print (Ind, AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], rateErr["Y"], sep="\t", file=sys.stdout)
+with open('sexdetermine.json', w) as outfile:
+    json.dump(Names, outfile)
