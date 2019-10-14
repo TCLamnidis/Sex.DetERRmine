@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-import sys, argparse
+import sys, argparse, json
 from math import sqrt
 from collections import OrderedDict
+
+VERSION=1.1
 
 def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     SNPs=[AutSnps, XSnps, YSnps]
@@ -86,6 +88,15 @@ for line in args.Input:
 
 # SortNames=OrderedDict(sorted(Names.items(), key=lambda t: t[1]))
 print ("#Sample", "#SnpsAut", "#SNPsX", "#SnpsY", "NrAut", "NrX", "NrY", "x-rate", "y-rate", "Err(x-rate)", "Err(y-rate)", sep="\t", file=sys.stdout)
+data=OrderedDict()
+# Add in proper tool version info to JSON output
+data['Metadata'] = {'tool_name' : "Sex.DetERRmine", "version" : VERSION}
 for Ind in Names:
     rate,rateErr=CalcErrors(AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]])
+    data[Ind] = {"Snps Autosomal" : AutSnps, "XSnps" : XSnps, "YSnps": YSnps, "NR Aut" : NrAut[Names[Ind]],"NrX": NrX[Names[Ind]], "NrY": NrY[Names[Ind]], "RateX" : rate["X"], "RateY": rate["Y"], "RateErrX" : rateErr["X"], "RateErrY" : rateErr["Y"]}
     print (Ind, AutSnps, XSnps, YSnps, NrAut[Names[Ind]], NrX[Names[Ind]], NrY[Names[Ind]], rate["X"], rate["Y"], rateErr["X"], rateErr["Y"], sep="\t", file=sys.stdout)
+    
+#Debugging purposes only
+#print(json.dumps(data, indent=4, sort_keys=True))
+with open('sexdetermine.json', 'w') as outfile:
+    json.dump(data, outfile)
