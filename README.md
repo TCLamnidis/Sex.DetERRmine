@@ -18,9 +18,9 @@ Alternatively, a Sample/bam list can be provided using the `-f` option. This lis
 
 For instructions on the options available you can try running the script with the `-h` flag:
 ```
-$SexDet.ErrorCalc.py -h
+$Sex.DetERRmine.py -h
 
-usage: SexDet.ErrorCalc.py [-h] [-I <INPUT FILE>] [-f SAMPLELIST]
+usage: Sex.DetERRmine.py [-h] [-I <INPUT FILE>] [-f SAMPLELIST]
 
 Calculate the relative X- and Y-chromosome coverage of data, as well as the
 associated error bars for each.
@@ -41,7 +41,7 @@ The script will print out the number of SNPs and the number of reads found on ea
 
 It is possible to pipe the `samtools depth` output directly to this script:
 ```
-samtools depth -a -q30 -Q30 -b <BED File> -f <BAM file list> | SexDet.ErrCalc.py -f <BAM file list>
+samtools depth -a -q30 -Q30 -b <BED File> -f <BAM file list> | Sex.DetERRmine.py -f <BAM file list>
 ```
 
 # Mathematical explanation
