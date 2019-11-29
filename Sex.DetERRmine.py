@@ -3,7 +3,7 @@ import sys, argparse, json
 from math import sqrt
 from collections import OrderedDict
 
-VERSION=1.1
+VERSION=1.1.1
 
 def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     SNPs=[AutSnps, XSnps, YSnps]
@@ -33,7 +33,12 @@ def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
 parser = argparse.ArgumentParser(description="Calculate the relative X- and Y-chromosome coverage of data, as well as the associated error bars for each.")
 parser.add_argument("-I", "--Input", metavar="<INPUT FILE>", type=argparse.FileType('r'), help="The input samtools depth file. Omit to read from stdin.", required=False)
 parser.add_argument("-f", "--SampleList", type=argparse.FileType('r'), help="A list of samples/bams that were in the depth file. One per line. Should be in the order of the samtools depth output.")
+parser.add_argument("-v", "--version", type="store_true", help="Print the version of the script and exit.")
 args = parser.parse_args()
+
+if args.version:
+    print(VERSION, file=sys.stderr)
+    sys.exit(0)
 
 if args.Input == None:
     args.Input = sys.stdin
