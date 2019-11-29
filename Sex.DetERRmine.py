@@ -3,7 +3,7 @@ import sys, argparse, json
 from math import sqrt
 from collections import OrderedDict
 
-VERSION=1.1.1
+VERSION="1.1.1"
 
 def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     SNPs=[AutSnps, XSnps, YSnps]
