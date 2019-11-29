@@ -98,5 +98,5 @@ for Ind in Names:
     
 #Debugging purposes only
 #print(json.dumps(data, indent=4, sort_keys=True))
-with open('sexdetermine.json', 'w') as outfile:
+with open('sexdeterrmine.json', 'w') as outfile:
     json.dump(data, outfile)
