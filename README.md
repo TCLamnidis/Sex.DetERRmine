@@ -47,7 +47,7 @@ samtools depth -a -q30 -Q30 -b <BED File> -f <BAM file list> | Sex.DetERRmine.py
 # Mathematical explanation
 We assume that sequenced reads are distributed along the genome randomly and independently from each other. The "genome" here is made up only of positions in the input depth file. 
 
-<p align="center"><img src="https://latex.codecogs.com/gif.latex?\LARGE&space;\textsl{N}=\sum_{i}&space;\textsl{N}_{i}" title="\textsl{N}=\sum_{i} \textsl{N}_{i}" /></p>
+<p align="center"><img src="https://latex.codecogs.com/gif.latex?\bg_white&space;\LARGE&space;\textsl{N}=\sum_{i}&space;\textsl{N}_{i}" title="\textsl{N}=\sum_{i} \textsl{N}_{i}" /></p>
 
 _N<sub>i</sub>_ is the number of sequenced reads in a a chunk of the genome _i_, the sum of which is the total number of reads on target, _N_.
 
