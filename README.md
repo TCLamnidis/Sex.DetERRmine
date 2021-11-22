@@ -1,4 +1,6 @@
 # Sex.DetERRmine
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg)](https://bioconda.github.io/)
+
 A python script to calculate the relative coverage of X and Y chromosomes, and their associated error bars, from the depth of coverage at specified SNPs.
 
 <br></br>
