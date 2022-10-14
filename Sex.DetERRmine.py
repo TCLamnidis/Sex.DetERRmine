@@ -18,7 +18,7 @@ def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     Total=sum(Reads)
     
     ## If no sites are covered at all, set error and rate to 0. 
-    if Total == 0:
+    if Total == 0 or Reads[0] == 0:
         (rate, rateErr) = ({"X":0.0,"Y":0.0}, {"X":0.0,"Y":0.0})
     else :
         for Bin,Idx in zip(["Aut", "X", "Y"], range(3)):
