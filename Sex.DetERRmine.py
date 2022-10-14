@@ -3,7 +3,7 @@ import sys, argparse, json
 from math import sqrt
 from collections import OrderedDict
 
-VERSION="1.1.2"
+VERSION="1.1.3"
 
 def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     SNPs=[AutSnps, XSnps, YSnps]
@@ -19,7 +19,7 @@ def CalcErrors(AutSnps, XSnps, YSnps, NrAut, NrX, NrY):
     
     ## If no sites are covered at all, set error and rate to 0. 
     if Total == 0:
-        (rate, rateErr) = ({"Aut":0.0,"X":0.0,"Y":0.0}, {"Aut":0.0,"X":0.0,"Y":0.0})
+        (rate, rateErr) = ({"X":0.0,"Y":0.0}, {"X":0.0,"Y":0.0})
     else :
         for Bin,Idx in zip(["Aut", "X", "Y"], range(3)):
             p[Bin]=Reads[Idx]/Total
