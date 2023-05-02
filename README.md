@@ -46,6 +46,11 @@ It is possible to pipe the `samtools depth` output directly to this script:
 samtools depth -a -q30 -Q30 -b <BED File> -f <BAM file list> | Sex.DetERRmine.py -f <BAM file list>
 ```
 
+# Citation
+If you use `Sex.DetERRmine` in your analysis, please cite:
+
+> Lamnidis, T.C. et al., 2018. Ancient Fennoscandian genomes reveal origin and spread of Siberian ancestry in Europe. Nature communications, 9(1), p.5018. Available at: http://dx.doi.org/10.1038/s41467-018-07483-5.
+
 # Mathematical explanation
 We assume that sequenced reads are distributed along the genome randomly and independently from each other. The "genome" here is made up only of positions in the input depth file. 
 
